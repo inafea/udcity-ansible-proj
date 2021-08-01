@@ -11,6 +11,7 @@ Resources:
     WebInstance:
         Type: 'AWS::EC2::Instance'
         Properties:
+            InstanceType: t2.nano
             SecurityGroups:
               - !Ref InstanceSecurityGroup
             KeyName: ubuntu
