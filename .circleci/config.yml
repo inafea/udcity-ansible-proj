@@ -1,21 +1,25 @@
 version: 2.1
 
 jobs:
-  create_infrastructure:
-    docker:
-      - image: amazon/aws-cli
-    steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints: ["60:cf:12:9f:e4:df:ba:ba:36:58:ef:ad:82:7d:aa:53"]
-      - run:
-          name: Ensure backend infrastructure exist
-          command: |
-            aws cloudformation deploy \
-              --template-file template.yml \
-              --stack-name my-stack-sec \
-              --region=eu-west-3
+  smoke_test:
+      docker:
+        - image: alpine:latest
+      steps:
+        - run: apk add --update curl
+        - run:
+            name: smoke test.
+            command: |
+              URL="https://blog.udacity.com/"
+              if curl -s --head ${URL} # test if blog.udacity. com exists
+              then
+               return 0
+              else
+               return 1
+              fi
+
 workflows:
   my_workflow:
     jobs:
-      - create_infrastructure
+      - smoke_test:
+          requires:
+            - configure_infrastructure
