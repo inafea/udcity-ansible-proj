@@ -1,0 +1,11 @@
+---
+- name: update system
+  become: true
+  become_method: sudo
+  apt:
+    update_cache: yes
+- name: remove unwanted
+  become: true
+  become_method: sudo
+  apt:
+    autoremove: yes
