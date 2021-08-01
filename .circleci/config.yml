@@ -15,7 +15,7 @@ jobs:
               --template-file template.yml \
               --stack-name my-stack \
               --region=eu-west-3
-  smok_test:
+  smoke_test:
     docker:
         - image: alpine:latest
     steps:
