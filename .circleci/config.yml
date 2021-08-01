@@ -6,7 +6,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - add_ssh_key:
+      - add_ssh_keys:
           fingerprints: ["d7:7d:14:bd:58:b5:59:78:1e:95:67:31:71:d1:f2:b5:a4:c1:34:e4"]
       - run:
           name: Ensure backend infrastructure exist
